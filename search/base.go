@@ -127,6 +127,47 @@ func movingCount2(m int, n int, k int) int {
 	return res
 }
 
+//判断图是否有环
+//广度优先搜索
+func canFinish(numCourses int, nums [][]int) bool {
+	var (
+		//定义有向图结构
+		edges = make([][]int, numCourses)
+		//定义节点入度情况
+		indges = make([]int, numCourses)
+
+		result []int
+	)
+
+	for _, v := range nums {
+		edges[v[1]] = append(edges[v[1]], v[0])
+		indges[v[0]]++
+	}
+
+	//将入度为0的加入队列
+	q := []int{}
+	for i := 0; i < numCourses; i++ {
+		if indges[i] == 0 {
+			q = append(q, i)
+		}
+	}
+
+	//从队列中取值
+	for len(q) > 0 {
+		used := q[0]
+		q = q[1:]
+		result = append(result, used)
+		for _, v := range edges[used] {
+			//与节点关联的节点入度都-1
+			indges[v]--
+			if indges[v] == 0 {
+				q = append(q, v)
+			}
+		}
+	}
+	return len(result) == numCourses
+}
+
 //树的子结构
 //前序DLR、后序LRD、中序遍历LDR
 //层序遍历(利用辅助栈)
