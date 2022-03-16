@@ -1,6 +1,9 @@
 package doublepoint
 
-import "strings"
+import (
+	"sort"
+	"strings"
+)
 
 /*
 双指针
@@ -131,6 +134,45 @@ func twoSum(nums []int, target int) []int {
 			res = append(res, nums[i])
 			res = append(res, nums[j])
 			return res
+		}
+	}
+	return res
+}
+
+//三数之和
+//三指针
+func threeSum(nums []int) [][]int {
+	//排序
+	sort.Ints(nums)
+	res := make([][]int, 0)
+	for k := 0; k < len(nums)-2; k++ {
+		if nums[k] > 0 {
+			break
+		}
+		if k > 0 && nums[k] == nums[k-1] {
+			continue
+		}
+		//设置双指针
+		i, j := k+1, len(nums)-1
+		for i < j {
+			sum := nums[k] + nums[i] + nums[j]
+			if sum > 0 {
+				for i > j && nums[j] == nums[j-1] {
+					j--
+				}
+			} else if sum < 0 {
+				for i > j && nums[i] == nums[i+1] {
+					i++
+				}
+			} else {
+				tmp := []int{}
+				tmp = append(tmp, nums[k])
+				tmp = append(tmp, nums[i])
+				tmp = append(tmp, nums[j])
+				res = append(res, tmp)
+				i++
+				j--
+			}
 		}
 	}
 	return res

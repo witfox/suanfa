@@ -18,6 +18,19 @@ func TestQuickSort(t *testing.T) {
 	res := quickSort(nums)
 	fmt.Println(res)
 }
+
+func TestInsertSort(t *testing.T) {
+
+	nums := []int{1, 0, 2, 4, 3, 5}
+	res := insertSort(nums)
+	fmt.Println(res)
+}
+func TestSelectSort(t *testing.T) {
+
+	nums := []int{1, 0, 2, 4, 3, 5}
+	res := selectSort(nums)
+	fmt.Println(res)
+}
 func TestMergeSort(t *testing.T) {
 
 	nums := []int{1, 0, 2, 4, 3, 5}

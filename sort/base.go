@@ -20,15 +20,42 @@ func popSort(nums []int) []int {
 		for j := i; j < len(nums)-1-i; j++ { //内循环
 			if nums[j] > nums[j+1] {
 				// 交换 nums[j], nums[j + 1]
-				temp := nums[j]
-				nums[j] = nums[j+1]
-				nums[j+1] = temp
+				swap(nums, j, j+1)
 				flag = true
 			}
 		}
 		if !flag {
 			break // 内循环未交换任何元素，则跳出
 		}
+	}
+	return nums
+}
+
+//插入排序
+func insertSort(nums []int) []int {
+	//从第二个开始比较
+	for i := 1; i < len(nums); i++ {
+		for j := i; j > 0; j-- {
+			if nums[j] > nums[j-1] {
+				//交换
+				swap(nums, j, j-1)
+			}
+		}
+	}
+	return nums
+}
+
+//选择排序
+func selectSort(nums []int) []int {
+	for i := 0; i < len(nums)-1; i++ {
+		k := i
+		//从末尾开始比较
+		for j := len(nums) - 1; j > i; j-- {
+			if nums[j] < nums[k] {
+				k = j
+			}
+		}
+		swap(nums, k, i)
 	}
 	return nums
 }
@@ -82,18 +109,21 @@ func mergeSort(nums []int) []int {
 
 	var recur func(left, right int)
 	recur = func(left, right int) {
-		//终止条件
+		//终止条件,只剩下单独的元素
 		if left >= right {
 			return
 		}
-		//找到中分索引
+		//找到中分索引，进行递归划分
 		m := (left + right) / 2
-		i, j := left, m+1
 		recur(left, m)
 		recur(m+1, right)
+
+		//暂存合并区间的元素
 		for k := left; k <= right; k++ {
 			tmp[k] = nums[k]
 		}
+		//两指针分别指向左/右子数组的首个元素
+		i, j := left, m+1
 		//合并子数组
 		for k := left; k <= right; k++ {
 			if i == m+1 {
