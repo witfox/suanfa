@@ -282,7 +282,7 @@ func dicesProbability(n int) []float64 {
 
 //股票的最大利润
 //假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？
-//转移方程： max(f(i-1), prices[i]-min(prices[0:i]))
+//转移方程： max(f(i-1), prices[i]-min(cost,prices[i]))
 func maxProfit(prices []int) int {
 	cost := math.MaxInt
 	res := 0 //记录当前最大收益

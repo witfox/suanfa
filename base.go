@@ -29,7 +29,7 @@ func jiecheng(N int) int {
 	return count
 }
 
-//两数之和  辅助哈希表 O(N) O(N)
+//两数之和  辅助哈希表 O(N)
 func twoSum(nums []int, target int) []int {
 	dic := make(map[int]int)
 
