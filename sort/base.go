@@ -17,7 +17,7 @@ func popSort(nums []int) []int {
 
 	for i := 0; i < len(nums)-1; i++ { //外循环
 		flag := false
-		for j := i; j < len(nums)-1-i; j++ { //内循环
+		for j := 0; j < len(nums)-1-i; j++ { //内循环
 			if nums[j] > nums[j+1] {
 				// 交换 nums[j], nums[j + 1]
 				swap(nums, j, j+1)
@@ -36,7 +36,7 @@ func insertSort(nums []int) []int {
 	//从第二个开始比较
 	for i := 1; i < len(nums); i++ {
 		for j := i; j > 0; j-- {
-			if nums[j] > nums[j-1] {
+			if nums[j] < nums[j-1] {
 				//交换
 				swap(nums, j, j-1)
 			}
