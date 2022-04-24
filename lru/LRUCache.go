@@ -1,7 +1,9 @@
 package lru
 
 /**
-* 最近最少使用缓存 LRU
+* 最近最少使用缓存 LRU(Least Recently Used)
+* 它是根据[时间维度]来选择将要淘汰的元素，即删除掉最长时间没被访问的元素。
+* hash表+双向链表
  */
 
 type LRUCache struct {
